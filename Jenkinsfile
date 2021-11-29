@@ -26,7 +26,7 @@ pipeline{
             }
             stage('Deploy'){
                 environment { 
-                DB_PASSWORD=credentials('pino')
+                DB_PASSWORD=credentials('db_password')
             }
                 steps{
                     sh "sudo docker-compose pull && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose up -d"
