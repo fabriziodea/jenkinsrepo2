@@ -1,5 +1,7 @@
 pipeline{
         agent any
+        environment {
+        DB_PASSWORD=credentials('db_password')
         stages{
             stage('Clone Repository'){
                 steps{
@@ -25,9 +27,6 @@ pipeline{
                 }
             }
             stage('Deploy'){
-                environment { 
-                DB_PASSWORD=credentials('db_password')
-            }
                 steps{
                     sh "sudo docker-compose pull && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose up -d"
                 }
